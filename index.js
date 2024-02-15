@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
 });
 
 // Connection to database
-connection.connect(function (err) {
+connection.connect(function(err) {
   console.error(err);
     if (err) {
         console.log('Error connecting!');
@@ -26,7 +26,7 @@ connection.connect(function (err) {
                          |__|             |_____|                                           |_____|             
     `);
     startPrompt();
-})
+});
 
 // Function for starting prompt
 function startPrompt() {
@@ -45,8 +45,8 @@ function startPrompt() {
             'Quit',
         ]
     })
-    .then (function ({task}) {
-        switch (task) {
+    .then (function({task}) {
+        switch(task) {
           case 'View all departments':
             viewDepartments();
             break;
@@ -68,35 +68,118 @@ function startPrompt() {
           case 'Update an employee role':
             updateRole();
             break;
-          case 'End':
+          case 'Quit':
             connection.end();
             break;
-        }
+        };
       });
-}
+};
 
 function viewDepartments() {
-
-}
+  var query = 
+  `SELECT * 
+   FROM departments`;
+  connection.query(query, function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    startPrompt();
+  });
+};
 
 function viewRoles() {
-
-}
+  var query = 
+  `SELECT * 
+   FROM roles`;
+  connection.query(query, function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    startPrompt();
+  });
+};
 
 function viewEmployees() {
-
-}
+  var query = 
+  `SELECT * 
+   FROM employees`;
+  connection.query(query, function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    startPrompt();
+  });
+};
 
 function addDepartment() {
-
-}
+  inquirer.prompt({
+    type: 'input',
+    name: 'department',
+    message: 'What is the name of the new department?'
+})
+  .then(function({department}) {
+    connection.query(`INSERT INTO departments (name) VALUES ('${department}')`, function(err, res)  {
+      if (err) throw err;
+      console.log('New department added!');
+      startPrompt();
+    });
+  });
+};
 
 function addRole() {
-
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'name',
+      message: 'What is the name of this role?',
+    },
+    {
+        type: 'number',
+        name: 'salary',
+        message: 'What is the salary for this role?'
+    },
+    {
+        type: 'input',
+        name: 'department',
+        message: 'Which department does this role belong to?'
+    }
+  ])
+  .then(function({name, salary, department}) {
+    connection.query(`INSERT INTO roles (name, salary, department) VALUES ('${name}', '${salary}', '${department}')`, function(err, res)  {
+      if (err) throw err;
+      console.log('New role added!');
+      startPrompt();
+    });
+  });
 }
 
 function addEmployee() {
-
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'first_name',
+      message: 'What is the employees first name?',
+    },
+    {
+        type: 'input',
+        name: 'last_name',
+        message: 'What is the employees last name?'
+    },
+    {
+        type: 'input',
+        name: 'role',
+        message: 'What role will be assigned to this employee?'
+    },
+    {
+      type: 'input',
+      name: 'manager',
+      message: 'Who is the manager for this employee?'
+    }
+  ])
+  .then(function({first_name, last_name, role, manager}) {
+    connection.query(`INSERT INTO employees (first_name, last_name, role, manager) VALUES ('${first_name}', '${last_name}', '${role}', '${manager}')`, function(err, res)  {
+      if (err) throw err;
+      console.log('New employee added!');
+      startPrompt();
+    });
+  });
 }
 
 function updateRole() {

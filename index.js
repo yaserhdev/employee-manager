@@ -13,7 +13,6 @@ const connection = mysql.createConnection({
 
 // Connection to database
 connection.connect(function(err) {
-  console.error(err);
     if (err) {
         console.log('Error connecting!');
         return;
@@ -131,14 +130,14 @@ function addRole() {
       message: 'What is the name of this role?',
     },
     {
-        type: 'number',
-        name: 'salary',
-        message: 'What is the salary for this role?'
+      type: 'number',
+      name: 'salary',
+      message: 'What is the salary for this role?'
     },
     {
-        type: 'input',
-        name: 'department',
-        message: 'Which department does this role belong to?'
+      type: 'input',
+      name: 'department',
+      message: 'Which department does this role belong to?'
     }
   ])
   .then(function({name, salary, department}) {
@@ -158,14 +157,14 @@ function addEmployee() {
       message: 'What is the employees first name?',
     },
     {
-        type: 'input',
-        name: 'last_name',
-        message: 'What is the employees last name?'
+      type: 'input',
+      name: 'last_name',
+      message: 'What is the employees last name?'
     },
     {
-        type: 'input',
-        name: 'role',
-        message: 'What role will be assigned to this employee?'
+      type: 'input',
+      name: 'role',
+      message: 'What role will be assigned to this employee?'
     },
     {
       type: 'input',

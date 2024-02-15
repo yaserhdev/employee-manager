@@ -1,17 +1,19 @@
-const mysql = require('mysql2');
+// Required dependencies
+const mysql = require('mysql');
 const inquirer = require('inquirer');
 
-
+// Connection credentials
 const connection = mysql.createConnection({
-    host: 'localhost',
-    port: 3001,
+    host: '127.0.0.1',
+    port: 3306,
     user: 'root',
-    password: 'Alg,0256',
+    password: 'password',
     database: 'employee_db',
 });
 
 // Connection to database
 connection.connect(function (err) {
+  console.error(err);
     if (err) {
         console.log('Error connecting!');
         return;
@@ -28,7 +30,7 @@ connection.connect(function (err) {
 
 // Function for starting prompt
 function startPrompt() {
-    inquirer.prompt ({
+    inquirer.prompt({
         type: 'list',
         name: 'task',
         message: 'What would you like to do?',
@@ -64,6 +66,7 @@ function startPrompt() {
             addEmployee();
             break;
           case 'Update an employee role':
+            updateRole();
             break;
           case 'End':
             connection.end();
@@ -71,3 +74,32 @@ function startPrompt() {
         }
       });
 }
+
+function viewDepartments() {
+
+}
+
+function viewRoles() {
+
+}
+
+function viewEmployees() {
+
+}
+
+function addDepartment() {
+
+}
+
+function addRole() {
+
+}
+
+function addEmployee() {
+
+}
+
+function updateRole() {
+
+}
+

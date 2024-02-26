@@ -4,23 +4,27 @@ VALUES ("Property Management"),
        ("Finance"),
        ("Marketing");
 
-INSERT INTO roles (name, salary, department) 
-VALUES ("Broker", 100000.00, "Real Estate"), 
-       ("Senior Property Manager", 75000.00, "Property Management"),
-       ("Sales Leader", 60000.00, "Real Estate"),
-       ("Marketing Leader", 40000.00, "Marketing"),
-       ("Admin", 40000.00, "Property Management"),
-       ("Finance Director", 60000.00, "Finance"),
-       ("Junior Property Manager", 50000.00, "Property Management"),
-       ("Realtor", 45000.00, "Real Estate");
+INSERT INTO roles (title, salary, department_id) 
+VALUES ("Broker", 100000.00, 2), 
+       ("Senior Property Manager", 75000.00, 1),
+       ("Sales Leader", 60000.00, 2),
+       ("Marketing Leader", 40000.00, 4),
+       ("Admin", 40000.00, 1),
+       ("Finance Director", 60000.00, 3),
+       ("Junior Property Manager", 50000.00, 1),
+       ("Realtor", 45000.00, 2);
 
-INSERT INTO employees (first_name, last_name, role, manager) 
-VALUES ("Betty", "Best", "Broker", ""),
-       ("Jake", "Grodt", "Senior Property Manager", "Betty Best"),
-	   ("Hsin-Hsin", "Lin", "Sales Leader", "Betty Best"),
-       ("Bernadette", "Bernadino", "Marketing Leader", "Betty Best"),
-       ("Brenda", "Chavez", "Senior Property Manager", "Betty Best"),
-       ("Sarah", "Meaden", "Finance Director", "Betty Best"),
-       ("Yaser", "Hussain", "Junior Property Manager", "Jake Grodt"),
-       ("Allison", "Baker", "Realtor", "Hsin-Hsin Lin"),
-       ("Cindy", "Nocente", "Realtor", "Hsin-Hsin Lin");
+INSERT INTO employees (first_name, last_name, role_id) 
+VALUES ("Betty", "Best", 1),
+       ("Jake", "Grodt", 2),
+	("Hsin-Hsin", "Lin", 3),
+       ("Bernadette", "Bernadino", 4),
+       ("Brenda", "Chavez", 5),
+       ("Sarah", "Meaden", 6),
+       ("Yaser", "Hussain", 7),
+       ("Allison", "Baker", 8),
+       ("Cindy", "Nocente", 8);
+
+UPDATE employees SET manager_id = 1 WHERE id IN (2, 3, 4, 5, 6);
+UPDATE employees SET manager_id = 2 WHERE id IN (7);
+UPDATE employees SET manager_id = 3 WHERE id IN (8, 9);

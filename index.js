@@ -89,7 +89,7 @@ function viewDepartments() {
 // Function to view all roles
 function viewRoles() {
   var query =
-    `SELECT roles.id, roles.title, roles.salary, departments.name AS department
+    `SELECT roles.id, roles.name AS title, roles.salary, departments.name AS department
      FROM roles LEFT JOIN departments ON roles.department_id = departments.id`;
   connection.query(query, function (err, res) {
     if (err) throw err;
@@ -101,7 +101,7 @@ function viewRoles() {
 // Function to view all employees
 function viewEmployees() {
   var query =
-    `SELECT employees.first_name, employees.last_name, roles.name, roles.salary, CONCAT(managers.first_name, ' ', managers.last_name) manager
+    `SELECT employees.first_name, employees.last_name, roles.name AS title, roles.salary, CONCAT(managers.first_name, ' ', managers.last_name) manager
      FROM employees LEFT JOIN roles ON employees.role_id = roles.id 
      LEFT JOIN employees managers ON employees.manager_id = managers.id`;
   connection.query(query, function (err, res) {

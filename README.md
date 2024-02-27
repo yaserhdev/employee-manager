@@ -28,18 +28,20 @@ In this challenge, I was given the task of creating CLI application which serves
 
 
 ## Installation
-To install this application you will need Node.js and MySQL installed on your computer. Once installed download the files from the repository and navigate to /employee-manager in your terminal. Use the following commands to install the required dependencies:
+To install this application you will need Node.js and MySQL installed on your computer. Once installed download the files from the repository and navigate to /employee-manager in your command line. Use the following commands to install the required dependencies:
 ```
 npm install inquirer@8.2.4
 npm i
 ```
-Once dependencies have been installed you will need to set up and seed the database. To do so navigate to /employee-manager/db in your terminal, start MySQL, and use the following commands:
+Open the `index.js` file in a code editor and in the connection credentials section of the code and make sure you have the correct host and port for your computer. Replace the **user** and **password** values with your MySQL credentials. Save the file.
+Open the `seeds.sql` file in a code editor and edit the data to reflect your organizations data. Save the file.
+Once credentials and seed data have been saved and dependencies have been installed you will need to set up and seed the database. To do so navigate to /employee-manager/db in your command line, start MySQL using `mysql -u root -p`, enter your password, and use the following commands:
 ```
 SOURCE schema.sql;
 SOURCE seeds.sql;
 quit;
 ```
-Once the database has been set up and seeded, navigate back to /employee-manager in your terminal and use the following command to start the application:
+Once the database has been set up and seeded, navigate back to /employee-manager in your command line and use the following command to start the application:
 ```
 node index.js
 ```
@@ -74,6 +76,8 @@ THEN I am prompted to select an employee to update and their new role and this i
 ```
 
 
+![Screenshot of deployed application](assets/images/employee-manager-screenshot.png)
+
 Application available for download at: https://github.com/yaserhdev/employee-manager
 
-Demo video of application available at: 
+Demo video of application available at: https://youtu.be/6FujA5ca4uY
